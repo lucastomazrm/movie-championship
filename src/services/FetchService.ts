@@ -17,17 +17,19 @@ export default class FetchService {
 
   private formatURL = (resource: string) => this.baseURI + resource;
 
-  private sendRequest = (uri: string) => fetch(uri)
-    .then(async (response) => {
+  private sendRequest = async <T>(uri: string): Promise<T> => {
+    return fetch(uri).then(response => {
       if (!response.ok) {
-        return { error: await response.json(), data: null };
+        throw new Error(response.statusText)
       }
-      return { error: null, data: await response.json() };
-    })
-    .catch(error => ({ error: error.message, data: null }));
+      return response.json() as Promise<{ data: T }>
+    }).then(data => {
+      return data.data;
+    });
+  }
 
-  public get(resource: string) {
+  public get = async <T>(resource: string) => {
     const uri = this.formatURL(resource);
-    return this.sendRequest(uri);
+    return await this.sendRequest<T>(uri);
   }
 }
