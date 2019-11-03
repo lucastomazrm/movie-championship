@@ -3,6 +3,7 @@ const http = require("http");
 const express = require("express");
 const log4js = require("log4js");
 const localConfig = require("./config/local.json");
+const bodyParser = require("body-parser");
 
 const logger = log4js.getLogger(appName);
 logger.level = process.env.LOG_LEVEL || "info";
@@ -20,11 +21,14 @@ app.use(function(req, res, next) {
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 require("./routers/index")(app, server);
 
