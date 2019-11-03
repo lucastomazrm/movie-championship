@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ProgressContainer = styled.div`
 width: 100%;
-position: absolute;
+position: fixed;
 bottom: 10%;
 left: 0;
 display: flex;

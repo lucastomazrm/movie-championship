@@ -3,7 +3,9 @@ import { ApplicationState } from "../../store";
 import { Dispatch, bindActionCreators } from "redux";
 import * as MovieActions from "../../store/ducks/movie/actions";
 import { connect } from "react-redux";
-import { Container, Steps, PageInfo } from "./style";
+import { Container, Steps } from "./style";
+import MovieCard from "../../components/MovieCard";
+import Intro from "../../components/Header";
 
 interface DispatchProps {
   loadAllMovies(): void;
@@ -19,15 +21,14 @@ const Movies = (props: Props) => {
       console.log(props.movies)
     }
   }, [props.movies])
+  if (!props.movies.data.length) return null;
+
   return (
     <Container>
-      <PageInfo>
-        Campeonato de Filmes
-        </PageInfo>
       <Steps>
-        sad
+        <MovieCard movie={props.movies.data[0]} checkCallback={() => { }} />
       </Steps>
-    </Container>
+    </Container >
   );
 };
 
