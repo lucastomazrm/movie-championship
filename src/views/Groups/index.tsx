@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { ApplicationState } from "../../store";
 import { Dispatch, bindActionCreators } from "redux";
 import * as MovieActions from "../../store/ducks/movie/actions";
@@ -6,42 +6,29 @@ import { connect } from "react-redux";
 import { IntroText, MoviesList, NextButton } from "./style";
 import history from "../../routes/history";
 import Container from "../../components/Container";
-import { MovieGroup } from "../../store/ducks/movie/types";
 import MovieGroupCard from "../../components/MovieGroupCard";
+import { Movie } from "../../store/ducks/movie/types";
 
 interface DispatchProps {
   setProgressIndex(index: number): void;
+  loadGroups(movies: Movie[]): void;
 }
 
 type Props = DispatchProps & ApplicationState;
+
 const Groups = (props: Props) => {
-
-  const [groups, setGroups] = useState<MovieGroup[]>([]);
-
-  const groupMovies = () => {
-    const sortedMovies = props.movies.selectedMovies.sort((a, b) => {
-      if (a.title < b.title) { return -1; }
-      if (a.title > b.title) { return 1; }
-      return 0;
-    })
-    let groups = []
-    for (let i = 0; i < sortedMovies.length / 2; i++) {
-      groups.push({
-        firstMovie: sortedMovies[i],
-        secondMovie: sortedMovies[sortedMovies.length - i - 1]
-      });
-    }
-    setGroups(groups);
-  }
 
   useEffect(() => {
     if (!props.movies.selectedMovies.length) {
       history.push('/');
+    } else if (!props.movies.groups.length && !props.movies.error) {
+      props.loadGroups(props.movies.selectedMovies);
     } else {
-      groupMovies();
+      props.setProgressIndex(50);
     }
-    props.setProgressIndex(50);
-  }, [props.movies.selectedMovies]);
+  }, [props.movies.groups]);
+
+  if (!props.movies.groups.length) return null;
 
   return (
     <Container>
@@ -50,7 +37,7 @@ const Groups = (props: Props) => {
       </IntroText>
 
       <MoviesList>
-        {groups.map((group, index) => <MovieGroupCard
+        {props.movies.groups.map((group, index) => <MovieGroupCard
           index={index + 1}
           key={group.firstMovie.id}
           movieGroup={group} />)}

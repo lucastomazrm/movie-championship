@@ -7,6 +7,7 @@ const INITIAL_STATE: MovieState = {
   data: [],
   progressIndex: 0,
   selectedMovies: [],
+  groups: [],
 };
 
 const reducer: Reducer<MovieState> = (state = INITIAL_STATE, action) => {
@@ -35,6 +36,15 @@ const reducer: Reducer<MovieState> = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedMovies: action.payload,
+      };
+    case MovieTypes.LOAD_GROUPS:
+      return { ...state, loading: true };
+    case MovieTypes.LOAD_GROUPS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        groups: action.payload,
       };
     default:
       return state;

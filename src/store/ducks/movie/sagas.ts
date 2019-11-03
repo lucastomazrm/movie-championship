@@ -1,15 +1,14 @@
 import { call, put } from 'redux-saga/effects';
 import { AnyAction } from 'redux';
-import { push } from 'connected-react-router';
 import {
-  requestFailure, loadAllMoviesSuccess,
+  requestFailure, loadAllMoviesSuccess, loadGroupsSuccess,
 } from './actions';
-import { Movie } from './types';
-import FetchService, { ComonError } from '../../../services/FetchService';
+import { Movie, MovieGroup } from './types';
+import FetchService from '../../../services/FetchService';
 
 const fetchApi = new FetchService('http://localhost:3001/');
 
-export function* getMovies({ payload }: AnyAction) {
+export function* getMovies() {
   try {
     const { data, error }: { data: Movie[]; error: any } = yield call(
       fetchApi.get.bind(fetchApi), 'movies');
@@ -17,6 +16,23 @@ export function* getMovies({ payload }: AnyAction) {
       yield put(requestFailure(error));
     } else {
       yield put(loadAllMoviesSuccess(data));
+    }
+  } catch (error) {
+    yield put(requestFailure(error));
+  }
+}
+
+export function* getGroups({ payload }: AnyAction) {
+  try {
+    const { data, error }: { data: MovieGroup[]; error: any } = yield call(
+      fetchApi.post.bind(fetchApi),
+      'movies/groups',
+      payload,
+    );
+    if (error) {
+      yield put(requestFailure(error));
+    } else {
+      yield put(loadGroupsSuccess(data));
     }
   } catch (error) {
     yield put(requestFailure(error));
