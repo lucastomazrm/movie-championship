@@ -1,13 +1,6 @@
 import styled from "styled-components";
 import background from '../../assets/img/movies-bg.png';
 
-export const Container = styled.div`
-padding: 0px 20px;
-flex: 1.5
-display: flex;
-height: 100%;
-flex-direction: column;
-`;
 
 export const MoviesList = styled.div`
 display: flex;
@@ -34,9 +27,16 @@ flex-direction: column;
 export const MoviesCounter = styled.span<{ length: number }>`
  font-size: 1rem;
  text-align: center;
- margin-top: 20px;
+ margin: 10px 0;
 
  b {
      color: ${props => props.length > 8 ? "red" : "#0174d9"};
  }
+`;
+
+export const NextButton = styled.button`
+    background-color: #0174d9;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
 `;

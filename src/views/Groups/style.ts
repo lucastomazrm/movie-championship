@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import background from '../../assets/img/movies-bg.png';
 
-export const Container = styled.div`
-padding: 0px 20px;
-flex: 1.5
-display: flex;
-height: 100%;
-flex-direction: column;
-`;
-
 export const MoviesList = styled.div`
 display: flex;
 flex-flow: row wrap;

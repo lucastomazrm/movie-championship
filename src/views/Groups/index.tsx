@@ -3,19 +3,22 @@ import { ApplicationState } from "../../store";
 import { Dispatch, bindActionCreators } from "redux";
 import * as MovieActions from "../../store/ducks/movie/actions";
 import { connect } from "react-redux";
-import { Container, IntroText, MoviesList, MoviesCounter } from "./style";
+import { IntroText, MoviesList, MoviesCounter } from "./style";
 import MovieCard from "../../components/MovieCard";
 import Intro from "../../components/Header";
 import { Movie } from "../../store/ducks/movie/types";
+import Container from "../../components/Container";
 
 interface DispatchProps {
   setProgressIndex(index: number): void;
 }
 
 type Props = DispatchProps & ApplicationState;
-const Movies = (props: Props) => {
+const Groups = (props: Props) => {
 
-
+  useEffect(() => {
+    props.setProgressIndex(50);
+  }, []);
 
   return (
     <Container>
@@ -34,4 +37,4 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Movies);
+)(Groups);

@@ -3,10 +3,12 @@ import { ApplicationState } from "../../store";
 import { Dispatch, bindActionCreators } from "redux";
 import * as MovieActions from "../../store/ducks/movie/actions";
 import { connect } from "react-redux";
-import { Container, IntroText, MoviesList, MoviesCounter } from "./style";
+import { IntroText, MoviesList, MoviesCounter, NextButton } from "./style";
+import history from '../../routes/history';
 import MovieCard from "../../components/MovieCard";
 import Intro from "../../components/Header";
 import { Movie } from "../../store/ducks/movie/types";
+import Container from "../../components/Container";
 
 interface DispatchProps {
   loadAllMovies(): void;
@@ -27,16 +29,23 @@ const Movies = (props: Props) => {
   }, [props.movies]);
 
   useEffect(() => {
-    console.log(selectedMovies);
-  }, [selectedMovies]);
+    props.setProgressIndex(0);
+  }, []);
 
   if (!props.movies.data.length) return null;
+
+  const hangleGroups = () => {
+    history.push('/groups');
+  }
 
   return (
     <Container>
       <IntroText>Fase de Seleção
         <span>Selecione 8 filmes que você deseja que entrem na competição e depois pressione o botão Avançar.</span>
       </IntroText>
+      <MoviesCounter length={selectedMovies.length}>
+        <b>{selectedMovies.length + ' '}</b> filme(s) selecionado(s) de <b>8</b>.
+      </MoviesCounter>
       <MoviesList>
         {props.movies.data.map(movie => <MovieCard key={movie.id} movie={movie} toogleChecked={checked => {
           if (!checked) {
@@ -53,9 +62,9 @@ const Movies = (props: Props) => {
           }
         }} />)}
       </MoviesList>
-      <MoviesCounter length={selectedMovies.length}>
-        <b>{selectedMovies.length}</b> filme(s) selecionado(s) de <b>8</b>.
-      </MoviesCounter>
+      <div style={{ justifyContent: "flex-end", display: "flex" }}>
+        <NextButton onClick={hangleGroups}>Avançar</NextButton>
+      </div>
 
     </Container >
   );
