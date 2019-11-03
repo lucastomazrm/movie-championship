@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { ApplicationState } from "../../store";
 import { Dispatch, bindActionCreators } from "redux";
-import * as CountryActions from "../../store/ducks/movie/actions";
+import * as MovieActions from "../../store/ducks/movie/actions";
 import { connect } from "react-redux";
 
-const Movies = () => {
+interface DispatchProps {
+  loadAllMovies(): void;
+}
+
+type Props = DispatchProps & ApplicationState;
+const Movies = (props: Props) => {
+  useEffect(() => {
+    if (!props.movies.data.length && !props.movies.loading && !props.movies.error) {
+      props.loadAllMovies();
+    } else {
+      console.log(props.movies)
+    }
+  }, [props.movies])
   return (
-    <div>Olá!</div>
+    <div onClick={() => {
+      props.loadAllMovies();
+    }}>Olá!</div>
   );
 };
 
 const mapStateToProps = (state: ApplicationState) => ({ ...state });
 const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(CountryActions, dispatch);
+  bindActionCreators(MovieActions, dispatch);
 
 export default connect(
   mapStateToProps,

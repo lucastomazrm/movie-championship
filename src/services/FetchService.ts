@@ -17,19 +17,25 @@ export default class FetchService {
 
   private formatURL = (resource: string) => this.baseURI + resource;
 
-  private sendRequest = async <T>(uri: string): Promise<T> => {
-    return fetch(uri).then(response => {
-      if (!response.ok) {
-        throw new Error(response.statusText)
-      }
-      return response.json() as Promise<{ data: T }>
-    }).then(data => {
-      return data.data;
-    });
-  }
+  private getHeaders = () => new Headers({
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  });
 
-  public get = async <T>(resource: string) => {
+  private sendRequest = (uri: string, requestInfo: RequestInit) => fetch(uri, requestInfo)
+    .then(async (response) => {
+      if (!response.ok) {
+        return { error: await response.json(), data: null };
+      }
+      return { error: null, data: await response.json() };
+    })
+    .catch(error => ({ error: error, data: null }));
+
+  get(resource: string) {
     const uri = this.formatURL(resource);
-    return await this.sendRequest<T>(uri);
+    const requestInfo = {
+      headers: this.getHeaders(),
+    };
+    return this.sendRequest(uri, requestInfo);
   }
 }

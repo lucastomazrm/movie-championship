@@ -7,14 +7,14 @@ import {
 import { Movie } from './types';
 import FetchService, { ComonError } from '../../../services/FetchService';
 
-const fetchApi = new FetchService('http://copafilmes.azurewebsites.net/api/');
+const fetchApi = new FetchService('http://localhost:3001/');
 
 export function* getMovies({ payload }: AnyAction) {
   try {
-    let uri = 'filmes';
-    const { data, error }: { data: Movie[]; error: ComonError } = yield call(fetchApi.get.bind(fetchApi), uri);
+    const { data, error }: { data: Movie[]; error: any } = yield call(
+      fetchApi.get.bind(fetchApi), 'movies');
     if (error) {
-      yield put(requestFailure(error.Message));
+      yield put(requestFailure(error));
     } else {
       yield put(loadAllMoviesSuccess(data));
     }
