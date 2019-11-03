@@ -38,4 +38,14 @@ export default class FetchService {
     };
     return this.sendRequest(uri, requestInfo);
   }
+
+  post(resource: string, data: any) {
+    const uri = this.formatURL(resource);
+    const requestInfo = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: this.getHeaders(),
+    };
+    return this.sendRequest(uri, requestInfo);
+  }
 }
