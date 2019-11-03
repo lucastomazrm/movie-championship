@@ -11,15 +11,18 @@ import { Movie } from "../../store/ducks/movie/types";
 
 interface Props {
     movie: Movie;
-    toogleChecked(checked: boolean): void;
+    toogleChecked?(checked: boolean): void;
 }
 
 const MovieCard = (props: Props) => {
     const [checked, setChecked] = useState<boolean>(false);
+
     return (
         <CardStyle checked={checked} onClick={() => {
-            setChecked(!checked);
-            props.toogleChecked(checked);
+            if (props.toogleChecked) {
+                setChecked(!checked);
+                props.toogleChecked(checked);
+            }
         }}>
             <CheckedButton checked={checked}>✓</CheckedButton>
             <CardContent>

@@ -22,3 +22,14 @@ flex-direction: column;
      font-weight: 300;
  }
 `;
+
+export const NextButton = styled.button`
+    background-color: #0174d9;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    :disabled {
+        background-color: #67a3d8;
+        cursor: not-allowed;
+    }
+`;
