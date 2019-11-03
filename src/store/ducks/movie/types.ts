@@ -6,7 +6,8 @@ export enum MovieTypes {
   LOAD_ALL_MOVIES = "@Movie/LOAD_ALL_MOVIES",
   LOAD_ALL_MOVIES_SUCCESS = "@Movie/LOAD_ALL_MOVIES_SUCCESS",
   REQUEST_FAILURE = "@Movie/REQUEST_FAILURE",
-  SET_PROGRESS_INDEX = "@Movie/SET_PROGRESS_INDEX"
+  SET_PROGRESS_INDEX = "@Movie/SET_PROGRESS_INDEX",
+  SET_SELECTED_MOVIES = "@Movie/SET_SELECTED_MOVIES"
 }
 
 /**
@@ -29,4 +30,5 @@ export interface MovieState {
   readonly loading: boolean;
   readonly error: string;
   readonly progressIndex: number;
+  readonly selectedMovies: Movie[];
 }

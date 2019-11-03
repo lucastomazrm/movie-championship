@@ -6,6 +6,7 @@ const INITIAL_STATE: MovieState = {
   loading: false,
   data: [],
   progressIndex: 0,
+  selectedMovies: [],
 };
 
 const reducer: Reducer<MovieState> = (state = INITIAL_STATE, action) => {
@@ -29,6 +30,11 @@ const reducer: Reducer<MovieState> = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         progressIndex: action.payload,
+      };
+    case MovieTypes.SET_SELECTED_MOVIES:
+      return {
+        ...state,
+        selectedMovies: action.payload,
       };
     default:
       return state;

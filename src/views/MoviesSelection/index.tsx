@@ -13,6 +13,7 @@ import Container from "../../components/Container";
 interface DispatchProps {
   loadAllMovies(): void;
   setProgressIndex(index: number): void;
+  setSelectedMovies(movies: Movie[]): void;
 }
 
 type Props = DispatchProps & ApplicationState;
@@ -35,6 +36,7 @@ const Movies = (props: Props) => {
   if (!props.movies.data.length) return null;
 
   const hangleGroups = () => {
+    props.setSelectedMovies(selectedMovies);
     history.push('/groups');
   }
 

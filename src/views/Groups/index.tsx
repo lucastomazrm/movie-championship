@@ -4,6 +4,7 @@ import { Dispatch, bindActionCreators } from "redux";
 import * as MovieActions from "../../store/ducks/movie/actions";
 import { connect } from "react-redux";
 import { IntroText, MoviesList } from "./style";
+import history from "../../routes/history";
 import MovieCard from "../../components/MovieCard";
 import Intro from "../../components/Header";
 import { Movie } from "../../store/ducks/movie/types";
@@ -17,8 +18,11 @@ type Props = DispatchProps & ApplicationState;
 const Groups = (props: Props) => {
 
   useEffect(() => {
+    if (!props.movies.selectedMovies.length) {
+      history.push('/');
+    }
     props.setProgressIndex(50);
-  }, []);
+  }, [props.movies.selectedMovies]);
 
   return (
     <Container>
