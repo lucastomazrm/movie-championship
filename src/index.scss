@@ -138,9 +138,19 @@ html,
 body {
   height: 100%;
   width: 100%;
+  background-color: #f7f7f8;
 }
 
 #root {
   height: 100%;
   width: 100%;
+}
+
+.RSPBprogressBar {
+  height: 20px !important;
+  width: 50%;
+
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
 }
