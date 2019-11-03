@@ -3,9 +3,11 @@ import { ApplicationState } from "../../store";
 import { Dispatch, bindActionCreators } from "redux";
 import * as MovieActions from "../../store/ducks/movie/actions";
 import { connect } from "react-redux";
+import { Container, Steps, PageInfo } from "./style";
 
 interface DispatchProps {
   loadAllMovies(): void;
+  setProgressIndex(index: number): void;
 }
 
 type Props = DispatchProps & ApplicationState;
@@ -18,9 +20,14 @@ const Movies = (props: Props) => {
     }
   }, [props.movies])
   return (
-    <div onClick={() => {
-      props.loadAllMovies();
-    }}>Olá!</div>
+    <Container>
+      <PageInfo>
+        Campeonato de Filmes
+        </PageInfo>
+      <Steps>
+        sad
+      </Steps>
+    </Container>
   );
 };
 

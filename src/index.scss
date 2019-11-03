@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,600,800&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
 v2.0 | 20110126
@@ -91,6 +91,7 @@ video {
   border: 0;
   font-size: 100%;
   vertical-align: baseline;
+  font-family: "Roboto", sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -128,24 +129,20 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
 * {
   font-family: "Nunito Sans", sans-serif;
   outline: none;
 }
-
 html,
 body {
   height: 100%;
   width: 100%;
   background-color: #f7f7f8;
 }
-
 #root {
   height: 100%;
   width: 100%;
 }
-
 .RSPBprogressBar {
   height: 20px !important;
   width: 50%;

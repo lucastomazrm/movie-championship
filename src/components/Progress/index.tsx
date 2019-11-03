@@ -4,9 +4,18 @@ import { ApplicationState } from "../../store";
 import { connect } from "react-redux";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
+import * as MovieActions from "../../store/ducks/movie/actions";
 import { IndexedStyle, ProgressContainer } from "./style";
+import { Dispatch, bindActionCreators } from "redux";
 
-type Props = ApplicationState;
+
+
+interface DispatchProps {
+    setProgressIndex(index: number): void;
+}
+
+type Props = ApplicationState & DispatchProps;
+
 const Progress = (props: Props) => {
 
     const transitionStyles: any = {
@@ -19,22 +28,23 @@ const Progress = (props: Props) => {
     return (
         <ProgressContainer>
             <ProgressBar percent={props.movies.progressIndex}>
-                <Step>
+                <Step transition="scale">
                     {({ accomplished, index, transitionState }: { accomplished: string, index: number, transitionState: string }) => (
                         <IndexedStyle accomplished={accomplished}
                             style={transitionStyles[transitionState]}
+                            onClick={() => props.setProgressIndex(0)}
                         > {index + 1}
                         </IndexedStyle>
                     )}
                 </Step>
-                <Step>
+                <Step transition="scale">
                     {({ accomplished, index }: { accomplished: string, index: number }) => (
                         <IndexedStyle accomplished={accomplished}>
                             {index + 1}
                         </IndexedStyle>
                     )}
                 </Step>
-                <Step>
+                <Step transition="scale">
                     {({ accomplished, index }: { accomplished: string, index: number }) => (
                         <IndexedStyle accomplished={accomplished}>
                             {index + 1}
@@ -46,8 +56,12 @@ const Progress = (props: Props) => {
     );
 };
 
+
 const mapStateToProps = (state: ApplicationState) => ({ ...state });
+const mapDispatchToProps = (dispatch: Dispatch) =>
+    bindActionCreators(MovieActions, dispatch);
 
 export default connect(
     mapStateToProps,
+    mapDispatchToProps
 )(Progress);
