@@ -8,12 +8,14 @@ import * as MovieActions from "../../store/ducks/movie/actions";
 import { PageInfo } from "./style";
 import { Dispatch, bindActionCreators } from "redux";
 import { Movie } from "../../store/ducks/movie/types";
+import Progress from "../Progress";
 
 const Intro = () => {
     const [checked, setChecked] = useState<boolean>(false);
     return (
         <PageInfo>
             Campeonato de Filmes
+          <Progress />
         </PageInfo>
     );
 };

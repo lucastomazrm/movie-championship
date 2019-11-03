@@ -17,7 +17,7 @@ export enum MovieTypes {
 export interface Movie {
   id: number;
   title: string;
-  releaseDate: string;
+  releaseYear: string;
   score: number;
 }
 

@@ -5,9 +5,11 @@ import { Route, Switch } from "react-router-dom";
 
 import store from "./store";
 import history from "./routes/history";
-import Countries from "./views/Movies";
+import MoviesSelection from "./views/MoviesSelection";
 import Progress from "./components/Progress";
 import Intro from "./components/Header";
+import Loading from "./components/Loading";
+import Groups from "./views/Groups";
 
 const App = () => {
   return (
@@ -15,9 +17,10 @@ const App = () => {
       <ConnectedRouter history={history}>
         <Intro />
         <Switch>
-          <Route exact path="/" component={Countries} />
+          <Route exact path="/" component={MoviesSelection} />
+          <Route exact path="/groups" component={Groups} />
         </Switch>
-        <Progress />
+        <Loading />
       </ConnectedRouter>
     </Provider>
   );

@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const ProgressContainer = styled.div`
-width: 100%;
-position: fixed;
-bottom: 10%;
-left: 0;
-display: flex;
+    width: 100%;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    display: flex;
     justify-content: center;
 `;
 export const IndexedStyle = styled.div<{ accomplished: string }>`

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap");
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
 v2.0 | 20110126
@@ -91,7 +91,6 @@ video {
   border: 0;
   font-size: 100%;
   vertical-align: baseline;
-  font-family: "Roboto", sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -130,7 +129,7 @@ table {
   border-spacing: 0;
 }
 * {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   outline: none;
 }
 html,
