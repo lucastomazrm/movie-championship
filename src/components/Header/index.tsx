@@ -15,7 +15,7 @@ const Intro = () => {
     return (
         <PageInfo>
             Campeonato de Filmes
-          <Progress />
+            <Progress />
         </PageInfo>
     );
 };

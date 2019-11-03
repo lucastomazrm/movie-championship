@@ -63,7 +63,7 @@ const Movies = (props: Props) => {
         }} />)}
       </MoviesList>
       <div style={{ justifyContent: "flex-end", display: "flex" }}>
-        <NextButton onClick={hangleGroups}>Avançar</NextButton>
+        <NextButton onClick={hangleGroups} disabled={selectedMovies.length != 8}>Avançar</NextButton>
       </div>
 
     </Container >

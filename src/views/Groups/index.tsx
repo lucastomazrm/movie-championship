@@ -3,7 +3,7 @@ import { ApplicationState } from "../../store";
 import { Dispatch, bindActionCreators } from "redux";
 import * as MovieActions from "../../store/ducks/movie/actions";
 import { connect } from "react-redux";
-import { IntroText, MoviesList, MoviesCounter } from "./style";
+import { IntroText, MoviesList } from "./style";
 import MovieCard from "../../components/MovieCard";
 import Intro from "../../components/Header";
 import { Movie } from "../../store/ducks/movie/types";
@@ -26,6 +26,10 @@ const Groups = (props: Props) => {
         <span>Aqui estão os 8 filmes selecionados, separados em grupos.</span>
       </IntroText>
 
+
+      <MoviesList>
+
+      </MoviesList>
     </Container >
   );
 };

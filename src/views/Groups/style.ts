@@ -22,12 +22,3 @@ flex-direction: column;
      font-weight: 300;
  }
 `;
-
-export const MoviesCounter = styled.span<{ length: number }>`
- font-size: 1rem;
- text-align: center;
-
- b {
-     color: ${props => props.length > 8 ? "red" : "#0174d9"};
- }
-`;

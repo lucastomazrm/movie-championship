@@ -39,4 +39,8 @@ export const NextButton = styled.button`
     padding: 10px 20px;
     font-size: 1rem;
     color: white;
+    :disabled {
+        background-color: #67a3d8;
+        cursor: not-allowed;
+    }
 `;
