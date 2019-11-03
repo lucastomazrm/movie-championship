@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { IntroText, MoviesList, MoviesCounter, NextButton } from "./style";
 import history from '../../routes/history';
 import MovieCard from "../../components/MovieCard";
-import Intro from "../../components/Header";
 import { Movie } from "../../store/ducks/movie/types";
 import Container from "../../components/Container";
 
@@ -25,13 +24,9 @@ const Movies = (props: Props) => {
     if (!props.movies.data.length && !props.movies.loading && !props.movies.error) {
       props.loadAllMovies();
     } else {
-      console.log(props.movies)
+      props.setProgressIndex(0);
     }
-  }, [props.movies]);
-
-  useEffect(() => {
-    props.setProgressIndex(0);
-  }, []);
+  }, [props.movies.data]);
 
   if (!props.movies.data.length) return null;
 
@@ -56,7 +51,7 @@ const Movies = (props: Props) => {
             setSelectedMovies(currentList);
           } else {
             const index = selectedMovies.indexOf(movie);
-            if (index != -1) {
+            if (index !== -1) {
               let newList = [...selectedMovies];
               newList.splice(index, 1);
               setSelectedMovies(newList);
@@ -65,7 +60,7 @@ const Movies = (props: Props) => {
         }} />)}
       </MoviesList>
       <div style={{ justifyContent: "flex-end", display: "flex" }}>
-        <NextButton onClick={hangleGroups} disabled={selectedMovies.length != 8}>Avançar</NextButton>
+        <NextButton onClick={hangleGroups} disabled={selectedMovies.length !== 8}>Avançar</NextButton>
       </div>
 
     </Container >

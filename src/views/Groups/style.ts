@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import background from '../../assets/img/movies-bg.png';
 
 export const MoviesList = styled.div`
 display: flex;

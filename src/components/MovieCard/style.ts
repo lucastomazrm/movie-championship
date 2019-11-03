@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { } from "styled-components";
 
 export const CardStyle = styled.div<{ checked: boolean }>`
     border-radius: 4px;

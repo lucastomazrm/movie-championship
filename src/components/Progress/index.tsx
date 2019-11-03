@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { } from "react";
 import { ApplicationState } from "../../store";
 import { connect } from "react-redux";
 import "react-step-progress-bar/styles.css";

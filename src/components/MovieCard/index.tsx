@@ -1,12 +1,7 @@
 
-import React, { useState, useEffect } from "react";
-import { ApplicationState } from "../../store";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 import "react-step-progress-bar/styles.css";
-import { ProgressBar, Step } from "react-step-progress-bar";
-import * as MovieActions from "../../store/ducks/movie/actions";
 import { CardStyle, CheckedButton, CardContent, MovieTitle, MovieYear } from "./style";
-import { Dispatch, bindActionCreators } from "redux";
 import { Movie } from "../../store/ducks/movie/types";
 
 interface Props {
