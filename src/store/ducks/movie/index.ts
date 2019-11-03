@@ -5,6 +5,7 @@ const INITIAL_STATE: MovieState = {
   error: '',
   loading: false,
   data: [],
+  progressIndex: 0,
 };
 
 const reducer: Reducer<MovieState> = (state = INITIAL_STATE, action) => {
@@ -23,6 +24,11 @@ const reducer: Reducer<MovieState> = (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case MovieTypes.SET_PROGRESS_INDEX:
+      return {
+        ...state,
+        progressIndex: action.payload,
       };
     default:
       return state;
