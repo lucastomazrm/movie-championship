@@ -21,12 +21,20 @@ const Groups = (props: Props) => {
   useEffect(() => {
     if (!props.movies.selectedMovies.length) {
       history.push('/');
-    } else if (!props.movies.groups.length && !props.movies.error) {
+    } else if (!props.movies.groups.length) {
       props.loadGroups(props.movies.selectedMovies);
     } else {
       props.setProgressIndex(50);
     }
   }, [props.movies.groups]);
+
+
+  const champion = () => {
+    let quartas = [];
+    props.movies.groups.map(group => {
+
+    });
+  }
 
   if (!props.movies.groups.length) return null;
 
@@ -39,8 +47,8 @@ const Groups = (props: Props) => {
       <MoviesList>
         {props.movies.groups.map((group, index) => <MovieGroupCard
           index={index + 1}
-          key={group.firstMovie.id}
-          movieGroup={group} />)}
+          movieGroup={group}
+          key={group.movies[0].id} />)}
       </MoviesList>
       <div style={{ justifyContent: "center", display: "flex" }}>
         <NextButton onClick={() => { }}>Ver Resultado</NextButton>

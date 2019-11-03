@@ -52,8 +52,7 @@ module.exports = function(app) {
     let groups = [];
     for (let i = 0; i < sortedMovies.length / 2; i++) {
       groups.push({
-        firstMovie: sortedMovies[i],
-        secondMovie: sortedMovies[sortedMovies.length - i - 1]
+        movies: [sortedMovies[i], sortedMovies[sortedMovies.length - i - 1]]
       });
     }
     res.send(groups);

@@ -18,15 +18,14 @@ export enum MovieTypes {
  */
 
 export interface Movie {
-  id: number;
+  id: string;
   title: string;
-  releaseYear: string;
+  releaseYear: number;
   score: number;
 }
 
 export interface MovieGroup {
-  firstMovie: Movie;
-  secondMovie: Movie;
+  movies: Movie[];
 }
 
 /**
