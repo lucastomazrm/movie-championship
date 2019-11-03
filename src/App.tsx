@@ -7,7 +7,7 @@ import store from "./store";
 import history from "./routes/history";
 import MoviesSelection from "./views/MoviesSelection";
 import Progress from "./components/Progress";
-import Intro from "./components/Header";
+import Header from "./components/Header";
 import Loading from "./components/Loading";
 import Groups from "./views/Groups";
 
@@ -15,7 +15,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <Intro />
+        <Header />
         <Switch>
           <Route exact path="/" component={MoviesSelection} />
           <Route exact path="/groups" component={Groups} />

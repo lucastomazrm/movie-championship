@@ -7,8 +7,7 @@ import { ProgressBar, Step } from "react-step-progress-bar";
 import * as MovieActions from "../../store/ducks/movie/actions";
 import { IndexedStyle, ProgressContainer } from "./style";
 import { Dispatch, bindActionCreators } from "redux";
-
-
+import history from "../../routes/history";
 
 interface DispatchProps {
     setProgressIndex(index: number): void;
@@ -32,7 +31,10 @@ const Progress = (props: Props) => {
                     {({ accomplished, index, transitionState }: { accomplished: string, index: number, transitionState: string }) => (
                         <IndexedStyle accomplished={accomplished}
                             style={transitionStyles[transitionState]}
-                            onClick={() => props.setProgressIndex(0)}
+                            onClick={() => {
+                                props.setProgressIndex(0);
+                                history.push("/");
+                            }}
                         > {index + 1}
                         </IndexedStyle>
                     )}
