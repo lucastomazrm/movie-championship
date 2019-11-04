@@ -10,7 +10,7 @@ import Header from "./components/Header";
 import Loading from "./components/Loading";
 import Groups from "./views/Quarterfinals";
 import Semifinals from "./views/Semifinals";
-import Finals from "./views/Finals";
+import Finals from "./views/Final";
 
 const App = () => {
   return (
