@@ -3,13 +3,13 @@
 ## Use
 
 ```
-git clone git@github.com:lucastomazrm/movie-championship.git
+git clone https://github.com/voronianski/react-swipe.git
 git remote remove origin
 ```
 
 ## Run Express Server (Back End)
 
-1. Install Node.js \*
+1. Install Node.js
 2. Run `yarn install` to install the app's dependencies
 3. Run `node server` to start the server
 4. The server will be availabe on <http://localhost:3001>
