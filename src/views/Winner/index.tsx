@@ -3,11 +3,12 @@ import { ApplicationState } from "../../store";
 import { Dispatch, bindActionCreators } from "redux";
 import * as MovieActions from "../../store/ducks/movie/actions";
 import { connect } from "react-redux";
-import { IntroText, MoviesList, NextButton } from "./style";
+import { IntroText, MoviesList, CupStyle } from "./style";
 import history from "../../routes/history";
 import Container from "../../components/Container";
 import MovieGroupCard from "../../components/MovieGroupCard";
 import { Movie, MovieGroup } from "../../store/ducks/movie/types";
+import MovieCard from "../../components/MovieCard";
 
 interface DispatchProps {
   setProgressIndex(index: number): void;
@@ -16,15 +17,13 @@ interface DispatchProps {
 
 type Props = DispatchProps & ApplicationState;
 
-const Finals = (props: Props) => {
+const Winner = (props: Props) => {
 
   useEffect(() => {
     if (!props.movies.selectedMovies.length) {
       history.push('/');
-    } else if (props.movies.groups.length === 2 && !props.movies.loading) {
-      props.loadGroups(props.movies.groups, "groups/final");
     } else {
-      props.setProgressIndex(80);
+      props.setProgressIndex(100);
     }
   }, [props.movies.groups]);
 
@@ -32,19 +31,18 @@ const Finals = (props: Props) => {
 
   return (
     <Container>
-      <IntroText>Final
-        <span>Aqui estão os 2 filmes que irão concorrer ao troféu de Melhor Filme do Ano!</span>
+      <IntroText>Vencedor!
+        <span>E aqui está o melhor filme do ano, segundo nossas análises!</span>
+      </IntroText>
+      <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
+        <CupStyle />
+        <MovieCard movie={props.movies.groups[0].movies[0]} />
+      </div>
+      <IntroText>E em segundo lugar!
+        <span>Não menos importante, este recebeu o segundo lugar no pódium!</span>
       </IntroText>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <MovieGroupCard
-          index={1}
-          movieGroup={props.movies.groups[0]}
-        />
-      </div>
-      <div style={{ justifyContent: "center", display: "flex" }}>
-        <NextButton onClick={() => {
-          history.push('/winner');
-        }}>Ver Resultado</NextButton>
+        <MovieCard movie={props.movies.groups[0].movies[1]} />
       </div>
     </Container >
   );
@@ -57,4 +55,4 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Finals);
+)(Winner);

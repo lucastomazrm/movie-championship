@@ -11,6 +11,7 @@ import Loading from "./components/Loading";
 import Groups from "./views/Quarterfinals";
 import Semifinals from "./views/Semifinals";
 import Finals from "./views/Final";
+import Winner from "./views/Winner";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route exact path="/groups" component={Groups} />
           <Route exact path="/semifinals" component={Semifinals} />
           <Route exact path="/final" component={Finals} />
+          <Route exact path="/winner" component={Winner} />
         </Switch>
         <Loading />
       </ConnectedRouter>
