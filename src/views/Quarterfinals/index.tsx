@@ -7,24 +7,24 @@ import { IntroText, MoviesList, NextButton } from "./style";
 import history from "../../routes/history";
 import Container from "../../components/Container";
 import MovieGroupCard from "../../components/MovieGroupCard";
-import { Movie, MovieGroup } from "../../store/ducks/movie/types";
+import { Movie } from "../../store/ducks/movie/types";
 
 interface DispatchProps {
   setProgressIndex(index: number): void;
-  loadGroups(movies: MovieGroup[], step: string): void;
+  loadGroups(movies: Movie[], step: string): void;
 }
 
 type Props = DispatchProps & ApplicationState;
 
-const Semifinals = (props: Props) => {
+const Groups = (props: Props) => {
 
   useEffect(() => {
     if (!props.movies.selectedMovies.length) {
       history.push('/');
-    } else if (props.movies.groups.length === 4) {
-      props.loadGroups(props.movies.groups, "groups/semifinal");
+    } else if (!props.movies.groups.length) {
+      props.loadGroups(props.movies.selectedMovies, "groups");
     } else {
-      props.setProgressIndex(60);
+      props.setProgressIndex(30);
     }
   }, [props.movies.groups]);
 
@@ -33,8 +33,8 @@ const Semifinals = (props: Props) => {
 
   return (
     <Container>
-      <IntroText>Semifinal
-        <span>Aqui estão os 4 filmes que irão concorrer à fase final.</span>
+      <IntroText>Quartas de Final
+        <span>Aqui estão os 8 filmes selecionados, que irão concorrer à semifinal.</span>
       </IntroText>
 
       <MoviesList>
@@ -45,7 +45,7 @@ const Semifinals = (props: Props) => {
       </MoviesList>
       <div style={{ justifyContent: "center", display: "flex" }}>
         <NextButton onClick={() => {
-          history.push('/final')
+          history.push('/semifinals')
         }}>Avançar</NextButton>
       </div>
     </Container >
@@ -59,4 +59,4 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Semifinals);
+)(Groups);

@@ -55,6 +55,20 @@ const Progress = (props: Props) => {
                         </IndexedStyle>
                     )}
                 </Step>
+                <Step transition="scale">
+                    {({ accomplished, index }: { accomplished: string, index: number }) => (
+                        <IndexedStyle accomplished={accomplished}>
+                            {index + 1}
+                        </IndexedStyle>
+                    )}
+                </Step>
+                <Step transition="scale">
+                    {({ accomplished, index }: { accomplished: string, index: number }) => (
+                        <IndexedStyle accomplished={accomplished}>
+                            🏆
+                        </IndexedStyle>
+                    )}
+                </Step>
             </ProgressBar>
         </ProgressContainer>
     );

@@ -7,46 +7,43 @@ import { IntroText, MoviesList, NextButton } from "./style";
 import history from "../../routes/history";
 import Container from "../../components/Container";
 import MovieGroupCard from "../../components/MovieGroupCard";
-import { Movie } from "../../store/ducks/movie/types";
+import { Movie, MovieGroup } from "../../store/ducks/movie/types";
 
 interface DispatchProps {
   setProgressIndex(index: number): void;
-  loadGroups(movies: Movie[], step: string): void;
+  loadGroups(movies: MovieGroup[], step: string): void;
 }
 
 type Props = DispatchProps & ApplicationState;
 
-const Groups = (props: Props) => {
+const Finals = (props: Props) => {
 
   useEffect(() => {
     if (!props.movies.selectedMovies.length) {
       history.push('/');
-    } else if (!props.movies.groups.length) {
-      props.loadGroups(props.movies.selectedMovies, "groups");
+    } else if (props.movies.groups.length === 2 && !props.movies.loading) {
+      props.loadGroups(props.movies.groups, "groups/final");
     } else {
-      props.setProgressIndex(50);
+      props.setProgressIndex(80);
     }
   }, [props.movies.groups]);
 
 
   if (!props.movies.groups.length) return null;
-
+  console.log(props.movies.groups)
   return (
     <Container>
-      <IntroText>Fase de Grupos
-        <span>Aqui estão os 8 filmes selecionados, separados em grupos.</span>
+      <IntroText>Final
+        <span>Aqui estão os 2 filmes que irão concorrer ao troféu de Melhor Filme do Ano!</span>
       </IntroText>
-
-      <MoviesList>
-        {props.movies.groups.map((group, index) => <MovieGroupCard
-          index={index + 1}
-          movieGroup={group}
-          key={group.movies[0].id} />)}
-      </MoviesList>
+      <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+        <MovieGroupCard
+          index={1}
+          movieGroup={props.movies.groups[0]}
+        />
+      </div>
       <div style={{ justifyContent: "center", display: "flex" }}>
-        <NextButton onClick={() => {
-          history.push('/semifinals')
-        }}>Ver Resultado</NextButton>
+        <NextButton onClick={() => { }}>Ver Resultado</NextButton>
       </div>
     </Container >
   );
@@ -59,4 +56,4 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Groups);
+)(Finals);

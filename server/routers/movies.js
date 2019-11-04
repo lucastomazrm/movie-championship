@@ -1,10 +1,10 @@
 const express = require("express");
 const fetch = require("node-fetch");
 
-module.exports = function (app) {
+module.exports = function(app) {
   const router = express.Router();
 
-  router.get("/", function (req, res, next) {
+  router.get("/", function(req, res, next) {
     const url = "https://copafilmes.azurewebsites.net/api/filmes";
 
     const requestInfo = {
@@ -37,7 +37,7 @@ module.exports = function (app) {
       });
   });
 
-  router.post("/groups", function (req, res, next) {
+  router.post("/groups", function(req, res, next) {
     const movies = req.body;
 
     const sortedMovies = movies.sort((a, b) => {
@@ -58,11 +58,11 @@ module.exports = function (app) {
     res.send(groups);
   });
 
-  router.post("/groups/seminfinal", function (req, res, next) {
+  router.post("/groups/semifinal", function(req, res, next) {
     const movies = req.body;
 
     let semifinal = [{ movies: [] }, { movies: [] }];
-    movies.map((group, index) => {
+    movies.forEach((group, index) => {
       let winner;
       if (group.movies[0].score === group.movies[1].score) {
         winner = group.movies.sort((a, b) => {
@@ -78,19 +78,47 @@ module.exports = function (app) {
         winner = group.movies.sort((m1, m2) => m2.score - m1.score)[0];
       }
       switch (index) {
-        case 0: semifinal[0].movies.push(winner);
+        case 0:
+          semifinal[0].movies.push(winner);
           break;
-        case 1: semifinal[1].movies.push(winner);
+        case 1:
+          semifinal[1].movies.push(winner);
           break;
-        case 2: semifinal[1].movies.push(winner);
+        case 2:
+          semifinal[1].movies.push(winner);
           break;
-        case 3: semifinal[0].movies.push(winner);
+        case 3:
+          semifinal[0].movies.push(winner);
           break;
-        default: break;
+        default:
+          break;
       }
     });
     res.send(semifinal);
+  });
 
+  router.post("/groups/final", function(req, res, next) {
+    const movies = req.body;
+
+    let final = [{ movies: [] }];
+    movies.forEach((group, index) => {
+      let winner;
+      if (group.movies[0].score === group.movies[1].score) {
+        winner = group.movies.sort((a, b) => {
+          if (a.title < b.title) {
+            return -1;
+          }
+          if (a.title > b.title) {
+            return 1;
+          }
+          return 0;
+        })[0];
+      } else {
+        winner = group.movies.sort((m1, m2) => m2.score - m1.score)[0];
+      }
+      final[0].movies.push(winner);
+    });
+    res.send(final);
   });
 
   app.use("/movies", router);
