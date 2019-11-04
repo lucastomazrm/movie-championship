@@ -9,22 +9,27 @@ class MoviesController {
   async groups(req, res) {
     const movies = req.body;
 
-    const sortedMovies = movies.sort((a, b) => {
-      if (a.title < b.title) {
-        return -1;
-      }
-      if (a.title > b.title) {
-        return 1;
-      }
-      return 0;
-    });
-    let groups = [];
-    for (let i = 0; i < sortedMovies.length / 2; i++) {
-      groups.push({
-        movies: [sortedMovies[i], sortedMovies[sortedMovies.length - i - 1]]
+    if (!movies) {
+      res.status(400).send();
+      return false;
+    } else {
+      const sortedMovies = movies.sort((a, b) => {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
       });
+      let groups = [];
+      for (let i = 0; i < sortedMovies.length / 2; i++) {
+        groups.push({
+          movies: [sortedMovies[i], sortedMovies[sortedMovies.length - i - 1]]
+        });
+      }
+      res.send(groups);
     }
-    res.send(groups);
   }
   async semifinal(req, res) {
     const movies = req.body;

@@ -1,5 +1,3 @@
-const rp = require("request-promise");
-
 class HealthService {
   static getStatus() {
     return new Promise((resolve, reject) => {
