@@ -1,7 +1,5 @@
 const app = require("./app");
-const localConfig = require("./config/local.json");
-
-const port = process.env.PORT || localConfig.port;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);
 });
