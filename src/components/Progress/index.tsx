@@ -11,6 +11,7 @@ import history from "../../routes/history";
 
 interface DispatchProps {
     setProgressIndex(index: number): void;
+    clearGroups(): void;
 }
 
 type Props = ApplicationState & DispatchProps;
@@ -33,6 +34,7 @@ const Progress = (props: Props) => {
                             style={transitionStyles[transitionState]}
                             onClick={() => {
                                 props.setProgressIndex(0);
+                                props.clearGroups();
                                 history.push("/");
                             }}
                         > {index + 1}

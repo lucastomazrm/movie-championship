@@ -46,6 +46,13 @@ const reducer: Reducer<MovieState> = (state = INITIAL_STATE, action) => {
         error: '',
         groups: action.payload,
       };
+    case MovieTypes.CLEAR_GROUPS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        groups: [],
+      };
     default:
       return state;
   }

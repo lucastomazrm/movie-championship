@@ -26,8 +26,8 @@ export function* getGroups({ payload }: AnyAction) {
   try {
     const { data, error }: { data: MovieGroup[]; error: any } = yield call(
       fetchApi.post.bind(fetchApi),
-      'movies/groups',
-      payload,
+      `movies/${payload.step}`,
+      payload.movies,
     );
     if (error) {
       yield put(requestFailure(error));
