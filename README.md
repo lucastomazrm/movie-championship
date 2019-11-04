@@ -23,6 +23,7 @@ git remote remove origin
 # Tools used in the project
 
 - [React](https://reactjs.org/)
+- [Styled Components](https://www.styled-components.com/)
 - [Redux](https://redux.js.org/)
 - [React Step Progress Bar](https://www.npmjs.com/package/react-step-progress-bar)
 - [ESlint](https://github.com/airbnb/javascript)
